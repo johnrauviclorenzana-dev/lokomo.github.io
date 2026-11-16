@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lokomo Studio — Jay Ar Lorenzana</title>
+<link rel="icon" href="lokomo-profile.jpeg">
+<style>
+:root{--bg:#faf8f5;--fg:#1c1b1a;--mute:#76716a;--line:#e4dfd8;--acc:#b5532f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141312;--fg:#f2eee8;--mute:#9a948b;--line:#2a2826;--acc:#e08a63}}
+:root[data-theme="dark"]{--bg:#141312;--fg:#f2eee8;--mute:#9a948b;--line:#2a2826;--acc:#e08a63}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Georgia,"Times New Roman",serif;line-height:1.6}
+a{color:inherit}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:var(--bg);border-bottom:1px solid var(--line)}
+.logo{font-size:18px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none} .logo img{height:34px;width:auto;display:block}
+nav a{margin-left:18px;font:13px system-ui,sans-serif;text-decoration:none;color:var(--mute)}
+.hero{max-width:900px;margin:0 auto;padding:64px 20px 28px;text-align:center}
+.hero h1{font-size:clamp(34px,8vw,64px);font-weight:400;margin:0 0 12px;line-height:1.1}
+.hero p{color:var(--mute);max-width:520px;margin:0 auto;font-size:17px}
+.filters{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:20px}
+.filters button{font:13px system-ui,sans-serif;padding:8px 16px;border:1px solid var(--line);background:transparent;color:var(--fg);border-radius:999px;cursor:pointer}
+.filters button.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.grid{max-width:1100px;margin:0 auto;padding:0 16px 40px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.tile{position:relative;aspect-ratio:4/5;border-radius:6px;overflow:hidden;cursor:pointer;border:0;padding:0;color:#fff;text-align:left;background-color:var(--line)}
+.tile span{position:absolute;left:0;right:0;bottom:0;padding:28px 14px 12px;background:linear-gradient(transparent,rgba(0,0,0,.55));font:13px system-ui,sans-serif;opacity:0;transition:opacity .2s}
+.tile:hover span,.tile:focus-visible span{opacity:1}
+section.box{max-width:700px;margin:0 auto;padding:40px 20px;text-align:center;border-top:1px solid var(--line)}
+section.box h2{font-weight:400;font-size:28px;margin:0 0 12px}
+section.box p{color:var(--mute)}
+.cta{display:inline-block;margin-top:10px;padding:12px 26px;background:var(--acc);color:#fff;text-decoration:none;border-radius:4px;font:14px system-ui,sans-serif}
+footer{text-align:center;padding:24px;color:var(--mute);font:12px system-ui,sans-serif}
+#lb{position:fixed;inset:0;z-index:20;background:rgba(10,10,10,.94);display:none;align-items:center;justify-content:center;padding:calc(20px + env(safe-area-inset-top,0px)) 16px calc(20px + env(safe-area-inset-bottom,0px))}
+#lb.open{display:flex}
+#lbimg{width:min(92vw,900px);height:76vh}
+#lbcap{position:absolute;bottom:calc(24px + env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;color:#ddd;font:14px system-ui,sans-serif}
+#lb button{position:absolute;background:none;border:0;color:#fff;font-size:34px;cursor:pointer;padding:12px}
+#x{top:calc(8px + env(safe-area-inset-top,0px));right:8px}#pv{left:4px}#nx{right:4px}
+</style>
+</head>
+<body>
+<header><a class="logo" href="#top"><img src="lokomo-logo.svg" alt="Lokomo Studio"></a><nav><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav></header>
+
+<div class="hero" id="top">
+<h1>Photography that tells the story.</h1>
+<p>Portraits, black and white, and school events — captured with a natural, honest eye.</p>
+</div>
+
+<div class="filters" id="work"></div>
+<div class="grid" id="grid"></div>
+
+<section class="box" id="about">
+<h2>About</h2>
+<p>Hi, I'm Jay Ar Lorenzana, a photographer based in Zambales and the person behind Lokomo Studio. I focus on real moments and warm, natural light.</p>
+</section>
+
+<section class="box" id="contact">
+<h2>Let's work together</h2>
+<p>Available for bookings and collaborations.</p>
+<a class="cta" href="mailto:lokomostudiogapo@gmail.com">lokomostudiogapo@gmail.com</a>
+</section>
+<footer>© 2026 Lokomo Studio · Jay Ar Lorenzana. All rights reserved.</footer>
+
+<div id="lb" role="dialog" aria-modal="true"><button id="x" aria-label="Close">×</button><button id="pv" aria-label="Previous">‹</button><div id="lbimg"></div><button id="nx" aria-label="Next">›</button><div id="lbcap"></div></div>
+
+<script>
+var cats=["All","Portraits","Black & White","School Event"];
+
+// t = title, c = category (must match cats exactly), src = file path
+var items=[
+  {t:"Portrait 1",c:"Portraits",src:"portrait1.jpeg"},
+  {t:"Portrait 2",c:"Portraits",src:"portrait2.jpeg"},
+  {t:"Portrait 3",c:"Portraits",src:"portrait3.jpeg"},
+  {t:"Black & White 1",c:"Black & White",src:"bw1.jpeg"},
+  {t:"Black & White 2",c:"Black & White",src:"bw2.jpeg"},
+  {t:"Black & White 3",c:"Black & White",src:"bw3.jpeg"},
+  {t:"School Event 1",c:"School Event",src:"school1.jpeg"},
+  {t:"School Event 2",c:"School Event",src:"school2.jpeg"},
+  {t:"School Event 3",c:"School Event",src:"school3.jpeg"},
+  {t:"School Event 4",c:"School Event",src:"school4.jpeg"},
+  {t:"School Event 5",c:"School Event",src:"school5.jpeg"}
+];
+
+var cur="All",shown=[],idx=0;
+function bg(x,m){return "url('"+x.src+"') center/"+m+" no-repeat"}
+function fl(){var f=document.getElementById("work");f.innerHTML="";cats.forEach(function(c){var b=document.createElement("button");b.textContent=c;if(c==cur)b.className="on";b.onclick=function(){cur=c;fl();gr()};f.appendChild(b)})}
+function gr(){var g=document.getElementById("grid");g.innerHTML="";shown=items.filter(function(x){return cur=="All"||x.c==cur});shown.forEach(function(x,i){var b=document.createElement("button");b.className="tile";b.style.background=bg(x,"cover");b.setAttribute("aria-label",x.t);b.innerHTML="<span>"+x.t+" · "+x.c+"</span>";b.onclick=function(){op(i)};g.appendChild(b)})}
+function op(i){idx=i;var x=shown[i];document.getElementById("lbimg").style.background=bg(x,"contain");document.getElementById("lbcap").textContent=x.t+" · "+x.c;document.getElementById("lb").className="open"}
+function cl(){document.getElementById("lb").className=""}
+function st(d){idx=(idx+d+shown.length)%shown.length;op(idx)}
+document.getElementById("x").onclick=cl;
+document.getElementById("pv").onclick=function(){st(-1)};
+document.getElementById("nx").onclick=function(){st(1)};
+document.getElementById("lb").onclick=function(e){if(e.target.id=="lb")cl()};
+document.onkeydown=function(e){if(e.key=="Escape")cl();if(e.key=="ArrowLeft")st(-1);if(e.key=="ArrowRight")st(1)};
+fl();gr();
+</script>
+</body>
+</html>
